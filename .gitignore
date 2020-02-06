@@ -12,7 +12,7 @@
 
 # fuck this dir in particular
 
-out/*
+**/out
 
 2670/Homework01/Exercise01/out/*
 
