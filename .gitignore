@@ -1,0 +1,17 @@
+# block all zips and PDFs
+
+*.zip
+
+*.pdf
+
+# block all .class files
+
+*.class
+
+# fuck this dir in particular
+
+2670/Homework01/Exercise01/out/*
+
+# fuck this file in particular
+
+2670/Homework01/Exercise01/Exercise01.iml
