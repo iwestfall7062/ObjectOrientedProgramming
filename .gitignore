@@ -6,6 +6,10 @@
 
 *.iml
 
+*.html
+
+*.txt
+
 # block all .class files
 
 *.class
@@ -13,6 +17,11 @@
 # fuck this dir in particular
 
 **/out
+**/.idea
+**/META-INF
+**/Testing
+**/BobbysExercise03
+
 
 2670/Homework01/Exercise01/out/*
 
