@@ -12,6 +12,8 @@
 
 # fuck this dir in particular
 
+out/*
+
 2670/Homework01/Exercise01/out/*
 
 # fuck this file in particular
