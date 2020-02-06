@@ -1,30 +1,17 @@
-# block all zips and PDFs
-
+#ignore these file extensions
+-----------------------------
 *.zip
-
 *.pdf
-
 *.iml
-
 *.html
-
 *.txt
-
-# block all .class files
-
 *.class
 
-# fuck this dir in particular
-
+--------------------------
+#ignore these folder names
+--------------------------
 **/out
 **/.idea
 **/META-INF
 **/Testing
 **/BobbysExercise03
-
-
-2670/Homework01/Exercise01/out/*
-
-# fuck this file in particular
-
-2670/Homework01/Exercise01/Exercise01.iml
