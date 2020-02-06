@@ -4,6 +4,8 @@
 
 *.pdf
 
+*.iml
+
 # block all .class files
 
 *.class
