@@ -16,9 +16,26 @@
 //uses precomputed offsets to make look ups fast, you can take multiple passes over the data file to get the information
 //you need.
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Exercise02 {
+
+    //constants
+    public static final String INSTRUCTIONS = "//////////////////////////////////////////////////////////////////////" +
+            "/////////\n//////////////////////////////// Instructions /////////////////////////////////\n////////////" +
+            "///////////////////////////////////////////////////////////////////\nThis program displays a random" +
+            " quote from the fortunes file found in the\ncurrent working directory. It also accepts two optional" +
+            " command line arguments.\nIf \"debug\" is given as a command line argument then the number of fortunes" +
+            "\nfound in the fortunes file will be printed out, and which fortune was randomly\nselected will be" +
+            " printed out. If an integer number is given as a command line\nargument, then that fortune number will" +
+            " be printed out if available.";
 
     public static void main(String[] arguments) {
 
+        System.out.println(INSTRUCTIONS);
+
     }
+
 }
