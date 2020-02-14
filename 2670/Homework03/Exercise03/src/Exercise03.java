@@ -4,6 +4,9 @@
 //of the game and the overall total score for all sessions played. Think about how you can efficiently represent the
 //rules for winning.
 
+import package.Game;
+
+import java.io.File;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,11 +23,13 @@ public class Exercise03 {
 
         System.out.println(INSTRUCTIONS);
 
+        checkForSaveData();
+
         boolean continuePlaying = true;
 
         do {
 
-            System.out.print("\nRock = 1, Paper = 2, Scissors = 3, Spock = 4 and Lizard = 5\nPlease make a choice: ");
+            System.out.print("\nRock = 1, Paper = 2, Scissors = 3, Spock = 4, Lizard = 5 and End Game = 6\nPlease make a choice: ");
 
             try {
                 int playerChoice = KEYBOARD_INPUT.nextInt();
@@ -49,25 +54,25 @@ public class Exercise03 {
         String computerPlay = "";
 
         if (playerChoice == computerRoll) {
-            System.out.print("You tied.");
+            System.out.println("You tied.");
             winner = 1;
         } else if (playerChoice == 1 && (computerRoll == 3 || computerRoll == 5)) {
-            System.out.print("You won.");
+            System.out.println("You won.");
             winner = 1;
         } else if (playerChoice == 2 && (computerRoll == 1 || computerRoll == 4)) {
-            System.out.print("You won.");
+            System.out.println("You won.");
             winner = 1;
         } else if (playerChoice == 3 && (computerRoll == 2 || computerRoll == 5)) {
-            System.out.print("You won.");
+            System.out.println("You won.");
             winner = 1;
         } else if (playerChoice == 4 && (computerRoll == 1 || computerRoll == 3)) {
-            System.out.print("You won.");
+            System.out.println("You won.");
             winner = 1;
         } else if (playerChoice == 5 && (computerRoll == 2 || computerRoll == 4)) {
-            System.out.print("You won.");
+            System.out.println("You won.");
             winner = 1;
         } else {
-            System.out.print("You lost.");
+            System.out.println("You lost.");
         }
 
         return winner;
@@ -90,4 +95,22 @@ public class Exercise03 {
 
     }
 
+    private static void checkForSaveData() {
+        File saveData = new File("SaveData.txt");
+        boolean saveDataExists = saveData.exists();
+
+        if (saveDataExists) {
+            readFile();
+        } else {
+            createFile();
+        }
+    }
+
+    private static void readFile() {
+
+    }
+
+    private static void createFile() {
+
+    }
 }

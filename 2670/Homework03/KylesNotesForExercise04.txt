@@ -1,0 +1,33 @@
+Here's how I would organize this.
+
+1. Have one class (for now I'll call it baby) that you will make literally thousands of copies of (at runtime) that contains the basic data:
+	a. m_year (int)
+	b. m_name (string)
+	c. m_gender (Char)
+	d. m_num_kids (int)
+If you don't like the "m_" it's fine, it's a C++ convention, so do what you want. The "m_" prefix just denotes it's a member variable of the class, and that means you shouldn't see it referenced outside of the class. Anyway, the object should contain the basic data as well as some basic methods for setting/retrieving data (I don't know how it looks in Java, but this is how it would look in C++)
+	
+	// getters
+	int get_year() { return year; }
+	string get_name() { return name; }
+	char get_gender() { return gender; }
+	int get_num_kids() { return get_num_kids; }
+	
+	// setters
+	void set_year(int year) { m_year = year; }
+	void set_get_name(string name) { m_name = name; }
+	// you get the idea
+	
+This class will be the basis for the whole thing.
+
+2. You should have your parent object (for now I'll call it database) be nothing more than a collection of these objects. It will do the following:
+	a. Go through the entire directory, and read each file, one-by-one, one line at a time.
+	b. Each time it reads an entry, it creates a new "baby" object, and puts the data in the appropriate buckets (year, name, gender, num_kids). Once it's done, it should have the complete collection of these.
+3. You should have another, even higher level object (this would be the C/++ equivalent of your int main() fucntion) which will call data from the database object with queries based on the user input. Once the user enters the search criteria, your database object will have a search method which will go through the entire database, looking for all matching objects, and it will return a list (in C++ it would be a vector of pointers) of all the objects which met the criteria. From there, your main object would have to sort the data by year and display it in a graph of sorts.
+
+4. Bonus points if you have the database sort its data immediately after finishing reading from all the files, instead of leaving it all unsorted and having the main object do the sorting (it'll make search queries run faster this way).
+
+5. Also, start small. Don't try to do the whole thing in one shot.
+	a. Create the baby object first, and have your main object ask you for data in the same format as the file, to make sure the baby object works the way you think it will.
+	b. Once you've established that it works correctly, create the database object, and have it read ONE file, create baby objects, and drop the data in their appropriate buckets. Once you've got that working, turn it into a for loop, where the filename is a variable, and the year increments with each loop iteration.
+	c. Once you got THAT working, you're ready to go back to your main object and do the rest, or start on the data sorting in the database object first, your choice.
