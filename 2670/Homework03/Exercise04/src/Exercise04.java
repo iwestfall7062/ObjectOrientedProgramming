@@ -13,6 +13,7 @@
 //my own test files).
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Exercise04 {
@@ -30,9 +31,7 @@ public class Exercise04 {
         System.out.print("Please enter a name (ex. Emma): ");
         String nameToSearch = KEYBOARD_INPUT.nextLine();
         String genderToSearch = getGender();
-
-        File namesFile = new File("yob1880.txt");
-
+        processNamesFiles();
     }
 
     public static String getGender() {
@@ -45,9 +44,17 @@ public class Exercise04 {
         return genderToSearch;
     }
 
-    public static void processNamesFiles(){
+    public static void processNamesFiles() {
         for (int counter = 1880; counter <= 2018; counter++) {
-            File namesFile = new File("yob" + counter + ".txt");
+            try {
+                File namesFile = new File("yob" + counter + ".txt");
+                Scanner readFileIn = new Scanner(namesFile);
+                while (readFileIn.hasNext()) {
+
+                }
+            } catch (FileNotFoundException e) {
+            }
         }
+        System.out.println("It's working!");
     }
 }
