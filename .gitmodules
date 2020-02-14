@@ -1,0 +1,15 @@
+[submodule "Submodules/Bobby/Exercise03"]
+	path = Submodules/Bobby/Exercise03
+	url = https://github.com/Roberto-Rodriguez-01/Exercise03.git
+[submodule "Submodules/Rayz/Java-Projects"]
+	path = Submodules/Rayz/Java-Projects
+	url = https://github.com/kghimire09/Java-Projects.git
+[submodule "Submodules/Michael/Week3_Set01"]
+	path = Submodules/Michael/Week3_Set01
+	url = https://github.com/Michaelveli/Week3_Set01.git
+[submodule "Submodules/Michael/Week3_Set03"]
+	path = Submodules/Michael/Week3_Set03
+	url = https://github.com/Michaelveli/Week3_Set03.git
+[submodule "Submodules/Michael/Week3_Set04"]
+	path = Submodules/Michael/Week3_Set04
+	url = https://github.com/Michaelveli/Week3_Set04.git
