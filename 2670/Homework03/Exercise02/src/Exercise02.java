@@ -18,24 +18,104 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Exercise02 {
 
-    //constants
-    public static final String INSTRUCTIONS = "//////////////////////////////////////////////////////////////////////" +
-            "/////////\n//////////////////////////////// Instructions /////////////////////////////////\n////////////" +
-            "///////////////////////////////////////////////////////////////////\nThis program displays a random" +
-            " quote from the fortunes file found in the\ncurrent working directory. It also accepts two optional" +
-            " command line arguments.\nIf \"debug\" is given as a command line argument then the number of fortunes" +
-            "\nfound in the fortunes file will be printed out, and which fortune was randomly\nselected will be" +
-            " printed out. If an integer number is given as a command line\nargument, then that fortune number will" +
-            " be printed out if available.";
+    public static String instructions = "-------------------------------------------------------------------------------\n" +
+            "---------------------------------Instructions----------------------------------\n" +
+            "-------------------------------------------------------------------------------\n" +
+            "This program displays a random quote from the fortunes.txt file along with the\n" +
+            "cow from the CowSay program. There are two optional command line arguments that\n" +
+            "can be used as well. If \"debug\" is given as a command line argument then the\n" +
+            "number of fortunes in the fortunes.txt file and the fortune number displayed\n" +
+            "will be shown, along with the fortune itself. If a number is given as a command\n" +
+            "line argument then that number fortune will be displayed.\n" +
+            "-------------------------------------------------------------------------------";
+    public static Random fortuneNumber = new Random();
 
     public static void main(String[] arguments) {
 
-        System.out.println(INSTRUCTIONS);
+        System.out.println(instructions);
+        Scanner fortunes = null;
+        try {
+            fortunes = getFortunesFile();
+        } catch (FileNotFoundException e) {
+        }
 
+        String chosenFortune = "";
+        int fortuneIndex = 0;
+        String[] fortuneArray = new String[6770];
+
+        fortunes.useDelimiter("%");
+        while (fortunes.hasNext()) {
+            fortuneArray[fortuneIndex] = fortunes.next();
+            fortuneIndex++;
+        }
+
+        int randomFortune = fortuneNumber.nextInt(fortuneIndex);
+
+        int argument = 0;
+        if (arguments.length > 0) {
+            try {
+                argument = Integer.parseInt(arguments[0]);
+            } catch (NumberFormatException e) {
+            }
+            if (argument > 0 && argument < fortuneIndex) {
+                chosenFortune = (fortuneArray[argument]);
+            } else {
+                chosenFortune = (fortuneArray[randomFortune]);
+
+            }
+            if (arguments[0].equals("debug")) {
+                System.out.println("There are " + fortuneIndex + " fortunes in the fortunes.txt file.");
+                System.out.println("This fortune is number " + randomFortune + ".");
+            }
+        } else {
+            chosenFortune = (fortuneArray[randomFortune]);
+            fortunes.close();
+        }
+
+        String displayedFortune = chosenFortune;
+
+        String[] displayedFortuneArray = displayedFortune.split("\n");
+
+        int bubbleWidth = 0;
+        for (int counter = 0; counter < displayedFortuneArray.length; counter++){
+            if (displayedFortuneArray[counter].length() > bubbleWidth) {
+                bubbleWidth = displayedFortuneArray[counter].length();
+            }
+        }
+
+        printBubbleWidth("_", bubbleWidth);
+        System.out.print(displayedFortune);
+        printBubbleWidth("-", bubbleWidth);
+        System.out.println();
+        printCow();
     }
 
+    public static Scanner getFortunesFile() throws FileNotFoundException {
+        File fortunes = new File("fortunes");
+
+        if (!fortunes.canRead()) {
+            System.out.println("The fortunes file was not found.");
+            System.exit(0);
+        }
+        return new Scanner(fortunes);
+    }
+
+    private static void printCow() {
+        System.out.println("        \\   ^__^");
+        System.out.println("         \\  (oo)\\_______");
+        System.out.println("            (__)\\       )\\/\\");
+        System.out.println("                ||----w |");
+        System.out.println("                ||     ||");
+    }
+
+    private static void printBubbleWidth(String printedCharacter, int bubbleWidth) {
+        for (int counter = 0; counter < bubbleWidth; counter++) {
+            System.out.print(printedCharacter);
+        }
+    }
 }
