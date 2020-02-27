@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class Exercise02 {
 
     public static String instructions = "-------------------------------------------------------------------------------\n" +
-            "---------------------------------Instructions----------------------------------\n" +
+            "-------------------------------- Instructions ---------------------------------\n" +
             "-------------------------------------------------------------------------------\n" +
             "This program displays a random quote from the fortunes.txt file along with the\n" +
             "cow from the CowSay program. There are two optional command line arguments that\n" +

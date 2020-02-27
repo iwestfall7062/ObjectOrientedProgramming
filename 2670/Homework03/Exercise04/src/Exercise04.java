@@ -12,49 +12,96 @@
 //all of the data files. Do not assume what years of data will be given (i.e. I may test on a subset of the data or use
 //my own test files).
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Exercise04 {
 
-    //constants
-    public static String INSTRUCTIONS = "This program displays the changing popularity of an entered baby name and\n" +
-            "gender. The program will also display the years with highest and lowest\npopularity. When prompted" +
-            " please enter the name and gender you would like to\nsee data for.\n";
-    public static Scanner KEYBOARD_INPUT = new Scanner(System.in);
+    public static String instructions = "-------------------------------------------------------------------------------\n" +
+            "-------------------------------- Instructions ---------------------------------\n" +
+            "-------------------------------------------------------------------------------\n" +
+            "This program reads in data from files provided by the Social Security\n" +
+            "Administration about the changing popularity of baby names and displays the\n" +
+            "data about a given baby name and gender. When prompted, please enter the baby\n" +
+            "name and gender you would like to search for. Both entries are case sensitive,\n" +
+            "M or F for gender, and the appropriately capitalized baby name.\n" +
+            "-------------------------------------------------------------------------------";
+    public static Scanner keyboardInput = new Scanner(System.in);
 
     public static void main(String[] arguments) {
 
-        System.out.println(INSTRUCTIONS);
+        System.out.println(instructions);
 
-        System.out.print("Please enter a name (ex. Emma): ");
-        String nameToSearch = KEYBOARD_INPUT.nextLine();
-        String genderToSearch = getGender();
-        processNamesFiles();
+        System.out.print("Enter a name: ");
+        String name = keyboardInput.nextLine();
+
+        System.out.print("Enter a gender (M/F): ");
+        String gender = keyboardInput.nextLine();
+
+        calculateNames(name, gender);
     }
 
-    public static String getGender() {
-        String genderToSearch;
-        do {
-            System.out.print("Please enter M or F for gender: ");
-            genderToSearch = KEYBOARD_INPUT.nextLine();
+    public static void calculateNames(String name, String gender) {
 
-        } while (genderToSearch.equals('M') || genderToSearch.equals('F'));
-        return genderToSearch;
-    }
+        int yearWithLeastNamed = 0;
+        int maximumNamed = 0;
+        int yearWithMostNamed = 0;
+        int minimumNamed = 100000;
+        int filesProcessed = 0;
 
-    public static void processNamesFiles() {
-        for (int counter = 1880; counter <= 2018; counter++) {
+        for (int yearCounter = 1880; yearCounter <= 2018; yearCounter++) {
+
+            Scanner yobFiles = null;
+            String fileName = "yob" + yearCounter + ".txt";
+
             try {
-                File namesFile = new File("yob" + counter + ".txt");
-                Scanner readFileIn = new Scanner(namesFile);
-                while (readFileIn.hasNext()) {
-
-                }
+                yobFiles = new Scanner(new FileReader(fileName));
             } catch (FileNotFoundException e) {
             }
+
+            if (yobFiles != null) {
+                while (yobFiles.hasNextLine()) {
+                    String currentFileLine = yobFiles.nextLine();
+                    Scanner fileData = new Scanner(currentFileLine);
+                    while (fileData.hasNext()) {
+                        fileData.useDelimiter(",");
+
+                        String nameFromFile = fileData.next();
+                        String genderFromFile = fileData.next();
+
+                        int nameCount = fileData.nextInt();
+
+                        if (nameFromFile.equals(name) && genderFromFile.equals(gender)) {
+
+                            if (nameCount < minimumNamed) {
+                                minimumNamed = nameCount;
+                                yearWithLeastNamed = yearCounter;
+                            }
+
+                            if (nameCount > maximumNamed) {
+                                maximumNamed = nameCount;
+                                yearWithMostNamed = yearCounter;
+                            }
+
+                            System.out.println("Year: " + yearCounter + "  |  Babies named " + nameFromFile + ": "
+                                    + nameCount);
+
+                            filesProcessed++;
+                        }
+                    }
+                }
+            }
         }
-        System.out.println("It's working!");
+
+        if (filesProcessed == 0) {
+            System.out.println("No files were found. Example file name = yob2018.txt");
+            System.exit(0);
+        }
+
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println(yearWithMostNamed + " had the most babies named " + name + " at " + maximumNamed +
+                " babies.");
+        System.out.println(yearWithLeastNamed + " had the least babies named " + name + " at " + minimumNamed +
+                " babies.");
     }
 }

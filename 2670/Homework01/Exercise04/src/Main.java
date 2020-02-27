@@ -24,7 +24,7 @@ public class Main {
     public static final int DEFAULT_NUMBER_OF_STAIRS = 5;
     public static final int NOT_A_NUMBER_ERROR = 1;
     public static final int OUT_OF_BOUNDS_ERROR = 2;
-    public static final int LOWER_BOUND = 1;
+    public static final int LOWER_BOUND = 0;
     public static final int UPPER_BOUND = 20;
 
     public static void main(String[] arguments) {

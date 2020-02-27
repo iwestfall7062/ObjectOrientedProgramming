@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class MethodsAndConstants {
 
     //CONSTANTS
@@ -49,6 +52,38 @@ public class MethodsAndConstants {
             }
         }
         return minimum;
+    }
+
+    public static int getInt(Scanner keyboardInput, String prompt, String error) {
+        System.out.print(prompt);
+        while (!keyboardInput.hasNextInt()) {
+            keyboardInput.next();
+            System.out.println(error);
+            System.out.print(prompt);
+        }
+        return keyboardInput.nextInt();
+    }
+
+    public static void checkForSingleIntToken(Scanner keyboardInput, String prompt) {
+
+        String tokenString;
+        int numberOfTokens;
+        int input;
+
+        do {
+            System.out.println(prompt);
+            tokenString = keyboardInput.nextLine();
+            numberOfTokens = new StringTokenizer(tokenString, " ").countTokens();
+            try {
+                input = Integer.parseInt(tokenString);
+            } catch(NumberFormatException e) {
+                numberOfTokens = 0;
+                input = -1;
+            }
+        } while (numberOfTokens != 1);
+        keyboardInput.close();
+
+        System.out.println(input);
     }
 
 }
